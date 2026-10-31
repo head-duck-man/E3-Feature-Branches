@@ -5,7 +5,7 @@ const spin = document.querySelector<HTMLButtonElement>("#spin")!;
 const face = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 face.setAttribute("viewBox", "0 0 200 200");
 face.setAttribute("role", "img");
-face.setAttribute("aria-label", "A neutral face");
+face.setAttribute("aria-label", "A neutral face with spiky hair.");
 
 const head = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
 head.setAttribute("cx", "100");
@@ -16,6 +16,42 @@ head.setAttribute("fill", "#f3cf87");
 head.setAttribute("stroke", "#302c29");
 head.setAttribute("stroke-width", "4");
 face.append(head);
+
+for (let i = 0; i < 50; i++) {
+  const triangle = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "polygon",
+  );
+
+  const x = 25 + i * 3;
+  const y = 30 + Math.abs(100 - x) * 0.5;
+
+  triangle.setAttribute(
+    "points",
+    `${x},${y} ${x + 5},${y} ${x + 2.5},${y - 15}`,
+  );
+
+  triangle.setAttribute("fill", "#0a0909");
+  face.append(triangle);
+}
+
+for (let i = 0; i < 50; i++) {
+  const triangle = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "polygon",
+  );
+
+  const x = 25 + i * 3;
+  const y = 20 + Math.abs(100 - x) * 0.5;
+
+  triangle.setAttribute(
+    "points",
+    `${x},${y} ${x + 5},${y} ${x + 2.5},${y - 15}`,
+  );
+
+  triangle.setAttribute("fill", "#0a0909");
+  face.append(triangle);
+}
 
 const leftEye = document.createElementNS(
   "http://www.w3.org/2000/svg",

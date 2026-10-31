@@ -1,11 +1,35 @@
+import glassesUrl from "./assets/glasses.png?no-inline";
+import hairUrl from "./assets/spikyhair.png?no-inline";
+
 const portrait = document.querySelector<HTMLDivElement>("#portrait")!;
 const spin = document.querySelector<HTMLButtonElement>("#spin")!;
 
 function buildFace() {
-  const face = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  const face = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "svg",
+  );
+
   face.setAttribute("viewBox", "0 0 200 200");
   face.setAttribute("role", "img");
-  face.setAttribute("aria-label", "A neutral face");
+  face.setAttribute(
+    "aria-label",
+    "A neutral face with spiky hair and glasses.",
+  );
+
+  // Hair image (behind the head)
+  const hair = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "image",
+  );
+
+  hair.setAttribute("href", hairUrl);
+  hair.setAttribute("x", "-50");
+  hair.setAttribute("y", "0");
+  hair.setAttribute("width", "300");
+  hair.setAttribute("height", "65");
+
+  face.append(hair);
 
   const head = document.createElementNS(
     "http://www.w3.org/2000/svg",
@@ -42,7 +66,10 @@ function buildFace() {
   rightEye.setAttribute("fill", "#302c29");
   face.append(rightEye);
 
-  const nose = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  const nose = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "line",
+  );
   nose.setAttribute("x1", "100");
   nose.setAttribute("y1", "96");
   nose.setAttribute("x2", "96");
@@ -52,7 +79,10 @@ function buildFace() {
   nose.setAttribute("stroke-linecap", "round");
   face.append(nose);
 
-  const mouth = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  const mouth = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "line",
+  );
   mouth.setAttribute("x1", "75");
   mouth.setAttribute("y1", "137");
   mouth.setAttribute("x2", "125");
@@ -62,11 +92,24 @@ function buildFace() {
   mouth.setAttribute("stroke-linecap", "round");
   face.append(mouth);
 
+  // Glasses image (in front of the eyes)
+  const glasses = document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "image",
+  );
+
+  glasses.setAttribute("href", glassesUrl);
+  glasses.setAttribute("x", "5");
+  glasses.setAttribute("y", "40");
+  glasses.setAttribute("width", "190");
+  glasses.setAttribute("height", "95");
+
+  face.append(glasses);
+
   return face;
 }
 
 const face = buildFace();
-
 portrait.append(face);
 
 spin.addEventListener("click", () => {

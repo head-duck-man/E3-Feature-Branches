@@ -5,7 +5,41 @@ const spin = document.querySelector<HTMLButtonElement>("#spin")!;
 const face = document.createElementNS("http://www.w3.org/2000/svg", "svg");
 face.setAttribute("viewBox", "0 0 200 200");
 face.setAttribute("role", "img");
-face.setAttribute("aria-label", "A neutral face");
+face.setAttribute("aria-label", "A smiling face with gradient cheeks.");
+
+const defs = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "defs",
+);
+
+const gradient = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "linearGradient",
+);
+
+gradient.setAttribute("id", "cheek-shade");
+gradient.setAttribute("x1", "0%");
+gradient.setAttribute("y1", "0%");
+gradient.setAttribute("x2", "100%");
+gradient.setAttribute("y2", "0%");
+
+const color1 = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "stop",
+);
+color1.setAttribute("offset", "0%");
+color1.setAttribute("stop-color", "#f5c6a5");
+
+const color2 = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "stop",
+);
+color2.setAttribute("offset", "100%");
+color2.setAttribute("stop-color", "#bd5377");
+
+gradient.append(color1, color2);
+defs.append(gradient);
+face.append(defs);
 
 const head = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
 head.setAttribute("cx", "100");
@@ -16,6 +50,32 @@ head.setAttribute("fill", "#f3cf87");
 head.setAttribute("stroke", "#302c29");
 head.setAttribute("stroke-width", "4");
 face.append(head);
+
+const leftCheek = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "ellipse",
+);
+
+leftCheek.setAttribute("cx", "65");
+leftCheek.setAttribute("cy", "115");
+leftCheek.setAttribute("rx", "15");
+leftCheek.setAttribute("ry", "9");
+leftCheek.setAttribute("fill", "url(#cheek-shade)");
+
+face.append(leftCheek);
+
+const rightCheek = document.createElementNS(
+  "http://www.w3.org/2000/svg",
+  "ellipse",
+);
+
+rightCheek.setAttribute("cx", "135");
+rightCheek.setAttribute("cy", "115");
+rightCheek.setAttribute("rx", "15");
+rightCheek.setAttribute("ry", "9");
+rightCheek.setAttribute("fill", "url(#cheek-shade)");
+
+face.append(rightCheek);
 
 const leftEye = document.createElementNS(
   "http://www.w3.org/2000/svg",
@@ -49,11 +109,9 @@ nose.setAttribute("stroke-width", "4");
 nose.setAttribute("stroke-linecap", "round");
 face.append(nose);
 
-const mouth = document.createElementNS("http://www.w3.org/2000/svg", "line");
-mouth.setAttribute("x1", "75");
-mouth.setAttribute("y1", "137");
-mouth.setAttribute("x2", "125");
-mouth.setAttribute("y2", "137");
+const mouth = document.createElementNS("http://www.w3.org/2000/svg", "path");
+mouth.setAttribute("d", "M 70 130 Q 100 155 130 130");
+mouth.setAttribute("fill", "none");
 mouth.setAttribute("stroke", "#302c29");
 mouth.setAttribute("stroke-width", "4");
 mouth.setAttribute("stroke-linecap", "round");
